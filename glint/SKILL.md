@@ -135,14 +135,30 @@ Store values: `play/phone`, `ios/iphone`, `ios/ipad`, `play/tablet-7`, etc.
 
 ## Step 4: Import into Glint-Web and export
 
+Ask how they want to polish (if unclear):
+
+1. **Manual** - they edit alone in the browser  
+2. **Headless** - you export ZIP offstage; they review files  
+3. **Copilot** - you drive **their open tab** while they watch / take over  
+
+### Copilot (shared board) - guide the user
+
+Do **not** open a new Glint Web tab. Attach to theirs.
+
+1. Tell them: open their project in Glint Web (hosted editor or local).  
+2. Tell them: click **Allow agent** on the bottom Copilot pill.  
+3. Ask them to paste the **board code** (4 characters, e.g. `K7MP`) - or copy it from the pill.  
+4. Confirm the browser tab title starts with `[Glint K7MP]`.  
+5. Attach with `window.__GLINT_COPILOT__`: `isThisBoard(code)`, then `dispatch(..., { pairCode: code })`.  
+6. If several tabs are open, the code picks the right one. Never invent a second board.  
+7. On Pause / takeover, stop until they Resume.
+
 ### Option A - Browser editor (interactive)
 
-1. Start Glint-Web: `cd Glint-Web && npm install && npm run dev`
-2. Open http://localhost:5173
-3. Click "Import Folder" → select the output directory
-4. Pick a template from the gallery
-5. Set headlines, backgrounds, device frames in the editor
-6. Export → PNG ZIP
+1. Open Glint Web (Use Glint / local `npm run dev`)
+2. Import folder or drop PNGs
+3. Pick a template → polish frames
+4. Export → PNG ZIP
 
 ### Option B - Headless export (CI / agent)
 

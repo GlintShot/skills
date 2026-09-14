@@ -45,6 +45,22 @@ Templates use `common.json` + platform variants (`play.json`, `ios.json`, `table
 2. **SVG ZIP:** Same but SVG markup
 3. **.glint project:** Full round-trip format
 
+## Copilot (shared board)
+
+Each editor tab that clicks **Allow agent** gets a unique 4-character **board code** (also in the tab title as `[Glint CODE]`).
+
+Agents must:
+1. Ask the user for that code (do not open a new tab)
+2. Attach to `window.__GLINT_COPILOT__` on that page
+3. Pass `pairCode` on `dispatch`
+4. Stop on Pause until Resume
+
+```js
+__GLINT_COPILOT__.listBoards()
+__GLINT_COPILOT__.isThisBoard('K7MP')
+__GLINT_COPILOT__.dispatch('setDeviceScale', { frameIndex: 0, pct: 90 }, { pairCode: 'K7MP' })
+```
+
 ## Headless Export
 
 ```bash
