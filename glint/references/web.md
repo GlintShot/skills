@@ -51,19 +51,19 @@ Each editor tab that clicks **Allow agent** gets a unique 4-character **board co
 
 Agents must:
 1. Ask the user for that code (do not open a new tab)
-2. Attach to `window.__GLINT_COPILOT__` on that page
-3. Pass `pairCode` on `dispatch`
+2. Prefer MCP tools: `glint_editor_list_boards`, `glint_editor_state`, `glint_editor_dispatch`, `glint_editor_board_pass`
+3. Chrome CDP required: `--remote-debugging-port=9222 --user-data-dir=/tmp/glint-chrome-debug`
 4. Stop on Pause until Resume
 
 ```js
+// In-page (browser tools / CDP evaluate)
 __GLINT_COPILOT__.listBoards()
 __GLINT_COPILOT__.isThisBoard('K7MP')
 __GLINT_COPILOT__.dispatch('setDeviceScale', { frameIndex: 0, pct: 90 }, { pairCode: 'K7MP' })
-// Board pass: cursor walks all frames, shared transform from source
 __GLINT_COPILOT__.boardPass({ pairCode: 'K7MP' })
 ```
 
-CLI (user Chrome with `--remote-debugging-port=9222`):
+CLI:
 
 ```bash
 node scripts/copilot-attach.mjs --pair K7MP

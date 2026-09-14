@@ -149,10 +149,10 @@ Do **not** open a new Glint Web tab. Attach to theirs.
 2. Tell them: click **Allow agent** on the bottom Copilot pill.  
 3. Ask them to paste the **board code** (4 characters, e.g. `K7MP`) - or copy it from the pill.  
 4. Confirm the browser tab title starts with `[Glint K7MP]`.  
-5. Attach with `window.__GLINT_COPILOT__`: `isThisBoard(code)`, then `dispatch` / `boardPass`.  
-6. **Board pass:** `__GLINT_COPILOT__.boardPass({ pairCode })` walks every frame left→right with the agent cursor, copying transform knowledge from the source frame.  
-7. Or CLI (Chrome with `--remote-debugging-port=9222`):  
-   `node scripts/copilot-attach.mjs --pair K7MP`  
+5. Attach with MCP: `glint_editor_state` / `glint_editor_dispatch` / `glint_editor_board_pass` using that code  
+   (Chrome must be on CDP: `--remote-debugging-port=9222 --user-data-dir=/tmp/glint-chrome-debug`).  
+6. **Board pass:** `glint_editor_board_pass` walks every frame left→right with the agent cursor.  
+7. Or CLI: `node scripts/copilot-attach.mjs --pair K7MP` (from Glint-Web).  
 8. If several tabs are open, the code picks the right one. Never invent a second board.  
 9. On Pause / takeover, stop until they Resume.
 
@@ -180,8 +180,8 @@ node scripts/headless-export.mjs \
 
 If the MCP server is running:
 
-- `glint_validate_session` → check session folder
-- `glint_export` → headless ZIP export
+- Mode 2: `glint_validate_session` → `glint_export` / `glint_render`
+- Mode 3: `glint_editor_list_boards` → `glint_editor_state` / `glint_editor_dispatch` / `glint_editor_board_pass`
 
 ## Step 5: Verify and report
 
