@@ -59,8 +59,8 @@ Agents must:
 __GLINT_COPILOT__.listBoards()
 __GLINT_COPILOT__.isThisBoard('K7MP')
 __GLINT_COPILOT__.dispatch('setDeviceScale', { frameIndex: 0, pct: 90 }, { pairCode: 'K7MP' })
-// Stitch-style: cursor walks all frames, shared transform from source
-__GLINT_COPILOT__.stitchPass({ pairCode: 'K7MP' })
+// Board pass: cursor walks all frames, shared transform from source
+__GLINT_COPILOT__.boardPass({ pairCode: 'K7MP' })
 ```
 
 CLI (user Chrome with `--remote-debugging-port=9222`):

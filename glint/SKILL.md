@@ -149,8 +149,8 @@ Do **not** open a new Glint Web tab. Attach to theirs.
 2. Tell them: click **Allow agent** on the bottom Copilot pill.  
 3. Ask them to paste the **board code** (4 characters, e.g. `K7MP`) - or copy it from the pill.  
 4. Confirm the browser tab title starts with `[Glint K7MP]`.  
-5. Attach with `window.__GLINT_COPILOT__`: `isThisBoard(code)`, then `dispatch` / `stitchPass`.  
-6. **Stitch pass:** `__GLINT_COPILOT__.stitchPass({ pairCode })` walks every frame left→right with the agent cursor, copying transform knowledge from the source frame.  
+5. Attach with `window.__GLINT_COPILOT__`: `isThisBoard(code)`, then `dispatch` / `boardPass`.  
+6. **Board pass:** `__GLINT_COPILOT__.boardPass({ pairCode })` walks every frame left→right with the agent cursor, copying transform knowledge from the source frame.  
 7. Or CLI (Chrome with `--remote-debugging-port=9222`):  
    `node scripts/copilot-attach.mjs --pair K7MP`  
 8. If several tabs are open, the code picks the right one. Never invent a second board.  
