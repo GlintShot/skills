@@ -55,7 +55,7 @@ glint help 2>/dev/null || dart run glint_capture --help 2>/dev/null
 If not installed, activate it:
 
 ```bash
-dart pub global activate --source git https://github.com/Glint-Org/Glint-Capture.git
+dart pub global activate --source git https://github.com/GlintShot/Glint-Capture.git
 ```
 
 ### Path B - Android device (Glint-Bridge)

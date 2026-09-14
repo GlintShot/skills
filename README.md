@@ -1,13 +1,13 @@
 # Glint agent skills
 
-Agent skill for [Glint](https://github.com/Glint-Org) - create Play Store and App Store screenshots from real app UI.
+Agent skill for [Glint](https://github.com/GlintShot) - create Play Store and App Store screenshots from real app UI.
 
-**Docs:** https://glint-org.github.io/Glint-Docs/
+**Docs:** https://glintshot.github.io/Glint-Docs/
 
 ## Install
 
 ```bash
-npx skills add Glint-Org/skills
+npx skills add GlintShot/skills
 ```
 
 ## How to use it
@@ -19,7 +19,7 @@ npx skills add Glint-Org/skills
    - *Capture Play Store screens with Glint*
 4. The agent loads the `glint` skill and follows Capture → Web → export (or Bridge / MCP when that fits).
 
-You still need Glint tools available for the path you use (Capture CLI, Bridge + device, or Web). See the [docs](https://glint-org.github.io/Glint-Docs/).
+You still need Glint tools available for the path you use (Capture CLI, Bridge + device, or Web). See the [docs](https://glintshot.github.io/Glint-Docs/).
 
 ## Layout
 
@@ -33,11 +33,11 @@ glint/
 
 | Repo | Role |
 |------|------|
-| [Glint-Capture](https://github.com/Glint-Org/Glint-Capture) | Flutter capture |
-| [Glint-Bridge](https://github.com/Glint-Org/Glint-Bridge) | Device / ADB capture |
-| [Glint-Web](https://github.com/Glint-Org/Glint-Web) | Frames editor + ZIP |
-| [Glint-MCP](https://github.com/Glint-Org/Glint-MCP) | Agent tools |
-| [Glint-Docs](https://github.com/Glint-Org/Glint-Docs) | Public documentation |
+| [Glint-Capture](https://github.com/GlintShot/Glint-Capture) | Flutter capture |
+| [Glint-Bridge](https://github.com/GlintShot/Glint-Bridge) | Device / ADB capture |
+| [Glint-Web](https://github.com/GlintShot/Glint-Web) | Frames editor + ZIP |
+| [Glint-MCP](https://github.com/GlintShot/Glint-MCP) | Agent tools |
+| [Glint-Docs](https://github.com/GlintShot/Glint-Docs) | Public documentation |
 
 ## License
 
