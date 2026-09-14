@@ -154,7 +154,8 @@ Do **not** open a new Glint Web tab. Attach to theirs.
 6. **Board pass:** `glint_editor_board_pass` walks every frame left→right with the agent cursor.  
 7. Or CLI: `node scripts/copilot-attach.mjs --pair K7MP` (from Glint-Web).  
 8. If several tabs are open, the code picks the right one. Never invent a second board.  
-9. On Pause / takeover, stop until they Resume.
+9. On Pause, stop until they Resume. On Close (X), pairing ends - ask them to Allow agent again.  
+10. Allow agent survives page reload until they Close or close the tab.
 
 ### Option A - Browser editor (interactive)
 
