@@ -1,61 +1,50 @@
 # Glint-Bridge Reference
 
-## Commands
+## Agentic IDE (preferred - no API key)
+
+The IDE agent plans. Bridge only senses and acts.
 
 | Command | Description |
 |---------|-------------|
-| `python glint.py check` | Verify ADB + AI status |
-| `python glint.py devices` | List connected USB/WiFi devices |
-| `python glint.py capture` | Single screenshot → `output/` |
-| `python glint.py batch --count N` | N screenshots with 1s delay |
-| `python glint.py crawl --package com.app` | Auto-navigate + capture (heuristic) |
-| `python glint.py crawl --package com.app --ai` | AI-guided navigation + capture |
-| `python glint.py crawl-web --url https://example.com` | Web page crawl |
-| `python glint.py start` | WebSocket server for Glint-Web |
+| `python glint.py check` | Verify ADB |
+| `python glint.py devices` | List USB/WiFi devices |
+| `python glint.py agent launch com.app` | Open app |
+| `python glint.py agent screenshot` | One PNG + session.json update |
+| `python glint.py agent hierarchy` | UI targets + text |
+| `python glint.py agent tap X Y` | Tap |
+| `python glint.py agent scroll [forward\|backward]` | Swipe |
+| `python glint.py agent back` | Back |
+| `python glint.py capture` | Single shot (manual nav) |
+| `python glint.py batch --count N` | N shots with delay |
+| `python glint.py start` | WebSocket for Glint Studio |
+
+MCP: `glint_bridge_launch` · `screenshot` · `hierarchy` · `tap` · `scroll` · `back`
+
+## Headless crawl (CI)
+
+| Command | Description |
+|---------|-------------|
+| `python glint.py crawl --package com.app` | Appium heuristic |
+| `python glint.py crawl --package com.app --ai` | Optional: your vision key |
+| `python glint.py crawl-web --url https://…` | Playwright |
 
 ## Prerequisites
 
-- **ADB:** `apt install android-tools-adb` / `brew install android-platform-tools`
-- **Python 3.10+:** with `websockets>=12.0` installed
-- **Device:** USB connected with USB debugging enabled
-- **For AI crawl:** `GLINT_AI_API_KEY` or `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` env var
-- **For Appium crawl:** `pip install Appium-Python-Client` + running Appium server
-
-## Crawl Modes
-
-### Heuristic (no AI key)
-- Scrolls and taps through the app
-- Keeps every 3rd unique screen
-- Dedup by file size fingerprint
-- Good enough for simple apps
-
-### AI (with API key)
-- Vision model scores each screen for store marketing value
-- Smart navigation: taps feature-rich areas, scrolls to content
-- Rejects: login, loading, error, permission dialogs
-- Keeps 5-8 best unique screens
+- **ADB** + USB debugging
+- **Python 3.10+**
+- **Agentic path:** ADB only (no Appium, no API key)
+- **Headless Android crawl:** Appium + `Appium-Python-Client`
+- **Optional `--ai`:** `GLINT_AI_API_KEY` (or OpenAI/Anthropic) already in env - agents must not ask users for keys
 
 ## Output
 
 ```
 Glint-Bridge/output/
 ├── screenshot_0001.png
-├── screenshot_0002.png
-├── ...
+├── …
 └── session.json
 ```
 
-## WebSocket Protocol
+## WebSocket
 
-Server: `ws://127.0.0.1:7700`
-
-1. Client connects
-2. Client sends: `{"action":"pair","token":"<token>"}`
-3. Server accepts or rejects
-4. Client sends actions: `capture_single`, `capture_batch`, `crawl`, `devices`, `wifi`, `ping`
-
-## Security
-
-- Binds to `localhost` only (never `0.0.0.0`)
-- Pairing token required before any action
-- API keys read from env only
+`ws://127.0.0.1:7700` - pair with token, then capture / crawl actions.

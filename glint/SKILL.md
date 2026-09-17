@@ -164,18 +164,46 @@ Do **not** open a new Glint Web tab. Attach to theirs.
 3. Pick a template → polish frames
 4. Export → PNG ZIP
 
-### Option B - Headless export (CI / agent)
+### Option B - Headless (same rules as the manual editor)
+
+**Not CSS.** Studio paints with Fabric + `canvasEngine.js`. Store PNGs never go through CSS layout.
+
+There are two headless paths:
+
+| Path | Code | Parity with Studio |
+|------|------|--------------------|
+| **Editor twin (best)** | `headless-export.mjs` via Playwright against a built Studio | **Same** geometry, frames, chrome, shadows, fonts |
+| **Fast polish** | `polish-session.mjs` → `compose.js` + `render.mjs` | Shared rules, but a second JS compositor — keep aligned with `canvasEngine` |
+
+Prefer the editor twin when quality must match what you see in Studio:
 
 ```bash
 cd Glint-Web
-npm install && npm run build && npm run preview &
-# Wait for server to start
-npx playwright install chromium
+npm run build && npm run preview &
 node scripts/headless-export.mjs \
-  --session ../glint_screenshots \
-  --template blink-play \
+  --session ../Glint-Bridge/output \
+  --template mint-tags-play \
   --out ../Glint-ss.zip
 ```
+
+Fast agent path (Bridge theme + chrome crop + silhouette bezel):
+
+```bash
+node scripts/polish-session.mjs \
+  --session ../Glint-Bridge/output \
+  --out app-play.zip \
+  --template mint-tags-play \
+  --headlines "…"
+```
+
+### Capture quality (marketing)
+
+1. **Pixel ceiling** = source shot resolution. A 720×1600 phone upscales inside 1080×1920 — use a denser device when possible, or Glint-Capture at store size.
+2. **True-color on** for Bridge shots (default); crop status/nav unless the story needs them.
+3. **Keep only marketing screens** — reject login, permissions, empty states, keyboards, debug, loading, errors, duplicate carousels.
+4. **5–8 unique beats** with one job each (hero, feature, proof, CTA).
+5. **Theme from shots** (`theme.json` / `extract-theme`) — field color calm/neutral; captions contrast; never fight the app palette with a random warm template.
+6. **Headlines** short, benefit-led, above the device — never under the bezel.
 
 ### Option C - Via MCP tools
 
